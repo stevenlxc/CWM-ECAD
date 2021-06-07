@@ -33,7 +33,7 @@ module doorbell(
 
     //Todo: define your logic here  
     
-    assign #10 out = (sel==0)?a:
+    assign #5 out = (sel==0)?a:
                  b;
                                
       
