@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Exercise #1 - Electric Roller Blinds
-// Student Name:
-// Date: 
+// Student Name: Xuechen Lin 
+// Date: 7/6/2021
 //
 //  Description: In this exercise, you need to design a logical unit, where the  
 //  where the inputs a,b select which roller control signal func to output according to the following
@@ -33,5 +33,9 @@ module blinds(
     wire   out;
          
       //Todo: add you logic here
-
+        assign out = (a==0 && b==0)?func[0]:
+                     (a==0 && b==1)?func[1]:
+                     (a==1 && b==0)?func[2]:
+                     (a==1 && b==1)?func[3]:
+                     func[0];
 endmodule
