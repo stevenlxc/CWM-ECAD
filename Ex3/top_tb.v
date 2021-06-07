@@ -14,8 +14,14 @@ module top_tb(
     );
     
 //Todo: Parameters
-
+	parameter CLK_PERIOD = 10;
 //Todo: Regitsers and wires
+	reg clk;
+	reg [7:0] ab;
+	reg [7:0] ab;
+	reg 
+	reg err;
+	reg counter_out;
 
 //Todo: Clock generation
 
