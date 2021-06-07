@@ -24,7 +24,7 @@ module doorbell(
     //Todo: define inputs here
     input a,
     input b,
-    input [2:0] sel,
+    input sel,
     output out
     );
     
