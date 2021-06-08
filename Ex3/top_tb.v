@@ -36,6 +36,9 @@ module top_tb(
 //Todo: User logic
 	initial 
 	begin
+	change = 0;
+	on_off = 0;
+	rst = 0;
 		//initialise an error 
 		err = 0;
 	    	counter_prev = counter_out;
@@ -71,6 +74,13 @@ module top_tb(
 			$display("TEST FAILED");
 			err = 1;
 		end
+		
+		// change the input
+		counter_prev = counter_out;
+		change = change + 1;
+		rst = rst + 1;
+		on_off = on_off + 1;
+		
 		
 	end
 //Todo: Finish test, check for success
