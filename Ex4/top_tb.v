@@ -34,7 +34,7 @@ module top_tb(
 //Todo: User logic
 	initial 
 	begin
-	rst = 0;
+	rst = 1;
 	button = 0;
 	//initialise an error 
 		err = 0;
@@ -56,6 +56,12 @@ module top_tb(
 				$display("TEST FAILED");
 				err = 1;
 			end
+			begin
+			// change the input
+			colour_prev = colour;
+			button =~ button ;
+			rst = 0 ;
+			end
 		end
     		
 		// reset is one, check if the colour is 000
@@ -71,12 +77,6 @@ module top_tb(
 			$display("TEST FAILED");
 			err = 1;
 		end
-		
-		// change the input
-		colour_prev = colour;
-		button = button + 1;
-		rst = rst + 1;
-		
 		
 	end
 //Todo: Finish test, check for success
