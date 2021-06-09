@@ -36,7 +36,7 @@ module top_tb(
 //Todo: User logic
 	initial 
 	begin
-	change = 0;
+	change = 1;
 	on_off = 0;
 	rst = 1;
 		//initialise an error 
@@ -47,6 +47,8 @@ module top_tb(
 		begin
 			#CLK_PERIOD
 			//on_off is one, check if the counter counts up
+			if(change ==1)
+			begin
 			if((on_off == 1) && (counter_out < counter_prev))  
 			begin
 				$display("TEST FAILED");
@@ -63,9 +65,11 @@ module top_tb(
 			begin
 					// change the input
 					counter_prev = counter_out;
-					change = change + 1;
-					rst = rst - 1;
-					on_off = on_off + 1;
+					change =~ change;
+					rst = 0;
+					
+					on_off =~ on_off;
+			end
 			end
 		end
     		
@@ -86,7 +90,7 @@ module top_tb(
 	end
 //Todo: Finish test, check for success
 	initial begin
-	  #50
+	  #500
 	  if (err == 0)
 		$display("***TEST PASSED! :) ***");
    	  $finish;
