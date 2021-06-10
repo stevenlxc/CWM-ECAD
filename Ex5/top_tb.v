@@ -19,31 +19,15 @@ module top_tb(
 	reg err;
 	wire heating;
 	wire cooling;
-	reg [4:0] temperature;
-	reg flag = 1;
-
+	reg [4:0] temp;
+	
 //Todo: Clock generation
 	initial
 		begin
 		    clk = 0;
 		    forever
 		      #(CLK_PERIOD/2) clk=~clk;//flip the clock signal every half period
-		end
-//change the input temperature
-	initial
-		begin
-		//initialise a random temperature
-		temperature = 5'b10001;
-		forever
-		begin
-			#CLK_PERIOD
-			temperature <= flag ? (temperature + 5'b00001) : (temperature - 5'b00001);
-			if((temperature>5'b11000) || (temperature<5'b10000))
-				flag=~flag;
-
-		end
-		end
-			
+		end			
 
 
 //Todo: User logic
@@ -53,66 +37,38 @@ module top_tb(
 	//initialise an error
 		err = 0;
 		
-	
-		
+			
 		forever
 		begin
-		//check if the cooling and heating are both on
-		#CLK_PERIOD;
-		if((cooling==1) && (heating==1))
-		begin
+		#CLK_PERIOD
+		// change the input temperature
+		temp = $urandom_range(30,10);
+		#(CLK_PERIOD*3)
+		if(temp<18 && heating ==0)
+			begin
 			$display("TEST FAILED");
 			err = 1;
-		end
-		end
+			end
 
-
-		
-		forever 
-		begin
-			#CLK_PERIOD;
-		
-		//check if the system stays in idle when temperature is between 18 and 22
-		if(((temperature<5'b10110)&&(temperature>5'b10010))&&((cooling==1)||(heating==1)))
-		begin
+		if(temp>22 && cooling ==0)
+			begin
 			$display("TEST FAILED");
 			err = 1;
-		end
+			end
 
-		//check if the system can turn on cooling when temperature is higher than 22
-		if((temperature>=5'b10110) && ((cooling==0)||(heating==1)))
-		begin
+		if(cooling==1 && heating ==1)
+			begin
 			$display("TEST FAILED");
 			err = 1;
-		end
+			end
 
-		//check if the system can stop cooling when temperature is lower than 20
-		if((temperature<=5'b10100) && ((cooling ==1)||(heating==1)))
-		begin
-			$display("TEST FAILED");
-			err = 1;
 		end
-
-		//check if the system can turn on heating when temperature is lower than 18
-		if((temperature<=5'b10010) && ((heating==0)||(cooling==1)))
-		begin
-			$display("TEST FAILED");
-			err = 1;
-		end
-
-		//check if the system stop heating when temperature is highter than 20
-		if((temperature>=20) && ((heating==1)&&(cooling==1)))
-		begin
-			$display("TEST FAILED");
-			err = 1;
-		end	
-		end
-		end
-
+	
+	end
 
 //Todo: Finish test, check for success
 	initial begin
-	  #50
+	  #500
 	  if (err == 0)
 		$display("***TEST PASSED! :) ***");
    	  $finish;
@@ -121,7 +77,7 @@ module top_tb(
 //Todo: Instantiate counter module
 	AC top(
 		.clk (clk),
-		.temperature (temperature),
+		.temp (temp),
  		.heating (heating),
 		.cooling (cooling));
  

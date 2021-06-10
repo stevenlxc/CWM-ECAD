@@ -17,76 +17,33 @@
 module AC (
 	//add ports
 	input clk,
-	input [4:0] temperature,
+	input [4:0] temp,
 	output heating,
 	output cooling
 	);
 
-	//add registers and wires
+	//add registers and wires if required
+	//introduce a two-bit number state to represent the status of the system
+	reg [1:0] state;
 	
-	reg heating;
-	reg cooling;
+	//define 1 means on and 0 means off
+	//heating on:10   cooling on:01   nothing on(idle):00   both on(impossible):11
+	assign heating = state[1];
+	assign cooling = state[0];
 
 	//add user logic
 	always @(posedge clk)
 	begin 
-		// consider the idle state
-		if((heating == 0) && (cooling == 0))
-			begin
-			// condition to stay in the idle state
-			if ((temperature>18) && (temperature<22))
-				begin
-				heating <= 0;
-				cooling <= 0;
-				end
-			// condition requires heating
-			if (temperature <= 19)
-				begin
-				heating <= 1;
-				cooling <= 0;
-				end
-			// condition requires cooling	
-			else
-				begin
-				heating <= 0;
-				cooling <= 1;	
-				end
-			end
-		
-		// consider the cold state
-		if ((heating == 1) && (cooling == 0))
-			begin
-			// condition requires heating
-			if(temperature < 20)
-				begin
-				heating <= 1;
-				cooling <= 0;
-				end
-			else
-				begin
-				heating <= 0;
-				cooling <= 1;
-				end
-			end
-
-		// consider the hot state
-		if ((heating == 0) && (cooling == 1))
-			begin
-			// condition requires heating
-			if(temperature > 20)
-				begin
-				heating <= 0;
-				cooling <= 1;
-				end
-			else
-				begin
-				heating <= 1;
-				cooling <= 0;
-				end
-			end
-		
+		case(state)
+		//when heating is on
+		2'b10 : state = temp<20 ? 2'b10 : 2'b00;
+		//when the system is in idol state
+		2'b00 : state = temp<=18 ? 2'b10 : temp>=22 ? 2'b01 : 2'b00;
+		//when cooling is on
+		2'b01 : state = temp>20 ? 2'b01 : 2'b00;
+		default: state = 2'b00;
+		endcase
 	end
-
 endmodule
 
 
