@@ -35,15 +35,18 @@ module LED_lights (rst,clk,button,colour);
 	begin 
 		// check the reset to begin with
 		if(rst)
-			colour = 3'd000;
+			colour <= #1 3'd000;
+		
 		else
 			begin
-			if((colour == 3'd000) ||(colour == 3'd111)) 
-				colour = 3'd001;
-			
-				if (button) 
-					colour = colour + 3'd001;
+			if (button)
+				begin
+				colour <= #1 colour + 3'd001;
 				end
+			if((colour == 3'd000) ||(colour == 3'd111)) 
+				colour <= #1 3'd001;
+					
+			end
 	end 
 
 endmodule
