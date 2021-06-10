@@ -52,8 +52,7 @@ module top_tb(
 
 	//initialise an error
 		err = 0;
-		cooling = 0;
-		heating = 0;
+		
 	
 		
 		forever
