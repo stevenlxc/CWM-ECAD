@@ -40,24 +40,34 @@ module LED_lights (rst,clk,button,colour);
 		else
 			begin
 				if (button==0)
-					begin
-					if((colour == 3'b000) ||(colour == 3'b111)) 
-				
-					colour <= #1 3'b001;
-					else
 					colour <= colour;
-					end
 				else
-							
-
 					begin
-					if(colour == 3'b110)
-						colour <= 3'b001;
-					else
-						colour <= #1 colour + 3'b001;
+					if(colour == 3'b000) 
+						colour <= #1 3'b001;
 					
-					end
-			
+					if(colour == 3'b111)
+						colour <= #1 3'b001;
+						
+					if(colour == 3'b001)
+						colour <= #1 3'b010;
+
+					if(colour == 3'b010)
+						colour <= #1 3'b011;
+				
+					if(colour == 3'b011)
+						colour <= #1 3'b100;
+				
+					if(colour == 3'b100)
+						colour <= #1 3'b101;
+
+					if(colour == 3'b101)
+						colour <= #1 3'b110;
+
+					if(colour == 3'b110)
+						colour <= #1 3'b001;
+					end		
+					
 			
 			
 			end
