@@ -37,8 +37,8 @@ module top_tb(
 		forever
 		begin
 			#CLK_PERIOD
-			temperature = flag ? temperature + 5b'00001:temperature - 5b'00001;
-			if(temperature>5'b11000 || temperature<5'b10000)
+			temperature <= flag ? (temperature + 5'b00001) : (temperature - 5'b00001);
+			if((temperature>5'b11000) || (temperature<5'b10000))
 				flag=~flag;
 
 		end
@@ -54,12 +54,12 @@ module top_tb(
 		err = 0;
 		cooling = 0;
 		heating = 0;
-	end
+	
 		
 		forever
 		begin
 		//check if the cooling and heating are both on
-		#CLK_PERIOD
+		#CLK_PERIOD;
 		if((cooling==1) && (heating==1))
 		begin
 			$display("TEST FAILED");
@@ -71,7 +71,7 @@ module top_tb(
 		
 		forever 
 		begin
-			#CLK_PERIOD
+			#CLK_PERIOD;
 		
 		//check if the system stays in idle when temperature is between 18 and 22
 		if(((temperature<5'b10110)&&(temperature>5'b10010))&&((cooling==1)||(heating==1)))
@@ -106,6 +106,8 @@ module top_tb(
 		begin
 			$display("TEST FAILED");
 			err = 1;
+		end	
+		end
 		end
 
 
