@@ -42,7 +42,7 @@ module top_tb(
 	#CLK_PERIOD
 	enable = 1;
 	forever begin
-		#CLK_PERIOD
+		#(CLK_PERIOD*3)
 		
 		//the one bit in the input turns to eight bits in the output with each bit in its coresponding position
 		if((colour[0] != (&rgb[7:0])) || (colour[1] != (&rgb[15:8])) || (colour[2] != (&rgb[23:16])))
@@ -74,24 +74,4 @@ module top_tb(
 		.rgb (rgb)
 		);
 endmodule
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
