@@ -36,13 +36,12 @@ module top_tb(
 
 	//initialise an error
 		err = 0;
-		
+		// change the input temperature
+		temp = 5'd15;
 			
 		forever
 		begin
-		#CLK_PERIOD
-		// change the input temperature
-		temp = $urandom_range(30,10);
+		
 		#(CLK_PERIOD*3)
 		if(temp<18 && heating ==0)
 			begin
@@ -63,7 +62,7 @@ module top_tb(
 			end
 
 		end
-	
+		temp = temp + 1;
 	end
 
 //Todo: Finish test, check for success
