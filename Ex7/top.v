@@ -21,30 +21,31 @@ module selector(
 	input clk,
 	input sel,
 	input rst,
-	input button);
+	input button,
+	output [23:0] light);
 		
 	//add registers and wires if required
 	reg [23:0] white = 24'hffffff;
 	wire [2:0] colour;
 	wire [23:0] rgb;
 
-	output [23:0] light;
+	
 
-	mul Multiplexer(
+	Multiplexer Multiplexer(
 		.a(white),
 		.b(rgb),
-		sel(sel),
+		.sel(sel),
 		.out(light)
 		);
 
-	lights_mod LED_lights(
+	LED_lights LED_lights(
 		.clk(clk),
 		.rst(rst),
 		.button(button),
 		.colour(colour)
 		);
 
-	converter_mod RGB_converter(
+	RGB_convertor RGB_converter(
 		.clk(clk),
 		.enable(1),
 		.colour(colour),
