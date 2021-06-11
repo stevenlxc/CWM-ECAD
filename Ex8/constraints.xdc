@@ -48,6 +48,7 @@ set_property PULLUP true [get_ports reset__n]
 
 
 
+
 ######Timing constraints######
 
 creat_clock -name <clk> -period 5.0 [get_ports clk_p]
