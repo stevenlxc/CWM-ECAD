@@ -32,4 +32,4 @@ blk_mem_gen_0 RGB (
   .dina(24'h0),    // input wire [23 : 0] dina
   .douta(rgb)  // output wire [23 : 0] douta
 );
-
+endmodule

@@ -67,12 +67,13 @@ module top_tb(
 	end 	
 
 //Todo: Instantiate counter module
-	RGB top(
+	RGB_convertor top(
 		.clk (clk),
 		.enable (enable),
 		.colour (colour),
 		.rgb (rgb)
 		);
+endmodule
  
 
 
