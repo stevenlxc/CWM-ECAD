@@ -81,6 +81,7 @@ module top_tb(
 		$display("TEST FAILED");
 		err = 1;
 		end
+	lightPrev = light;
 	end
 	
 	//when button and sel are both zero, check if the system changes colour as in the defined order
@@ -92,14 +93,15 @@ module top_tb(
 			begin
 			$display("TEST FAILED");
 			err = 1;
-			end	
+			end
+		lightPrev = light; 	
 	end
 	end
 	
 
 //Todo: Finish test, check for success
 	initial begin
-	  #150
+	  #140
 	  if (err == 0)
 		$display("***TEST PASSED! :) ***");
    	  $finish;
