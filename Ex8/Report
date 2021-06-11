@@ -9,18 +9,25 @@ There are four types of critical warnings (shown below)
 [Common 17-55] 'set_property' expects at least one object. ["/home/centos/CWM-ECAD/Ex8/constraints.xdc":47]
 
 Question 2:
-worst case hold time:
+worst case hold time: 0.069
 
 Question 3:
-worst case setup time: 
+worst case setup time: 7.968
 
 Question 4:
+5 LUTS are used.
 
 Question 5:
+2 FFs are used.
 
 Question 6:
+0 block RAM is used.
 
 Question 7:
+expected power consumption: 3.856W
 
 Question 8:
+synthesize: 04:07
+implement: 14:53 
+
 
