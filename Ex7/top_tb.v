@@ -39,20 +39,24 @@ module top_tb(
 	err = 0;
 	rst = 0;
 	button = 0;
-
+	lightPrev = 24'd10;
+	
 	lightPrev = light;
 	
 	//when sel is zero, check if the ouput is always white light
 	sel = 0;
-	#CLK_PERIOD
+	forever
+	begin
+	#(CLK_PERIOD*3)
+	
 	if (light != 24'hffffff)
 		begin
 		$display("TEST FAILED");
 		err = 1;
 		end
-	
+
 	button = 1;
-	#(CLK_PERIOD)
+	#(CLK_PERIOD*3)
 	if (light != 24'hffffff)
 		begin
 		$display("TEST FAILED");
@@ -61,7 +65,7 @@ module top_tb(
 
 	sel = 1;
 	rst = 1;
-	#(CLK_PERIOD)
+	#(CLK_PERIOD*3)
 	if (light!= 24'h0000FF)
 		begin
 		$display("TEST FAILED");
@@ -77,6 +81,7 @@ module top_tb(
 		$display("TEST FAILED");
 		err = 1;
 		end
+	end
 	
 	//when button and sel are both zero, check if the system changes colour as in the defined order
 	button = 1;
@@ -90,6 +95,7 @@ module top_tb(
 			end	
 	end
 	end
+	
 
 //Todo: Finish test, check for success
 	initial begin
