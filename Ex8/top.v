@@ -52,7 +52,7 @@ module top(
       );
 
 //Add logic here
-	AC aircon(
+	AC airconditioning(
 	.clk(clk),
 	.temperature(temperature),
 	.heating(heating),

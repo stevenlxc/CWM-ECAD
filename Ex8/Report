@@ -1,0 +1,26 @@
+Report:
+
+Question 1:
+There are no errors present. 
+There are four types of critical warnings (shown below)
+[Designutils 20-1307] Command 'get_ports{clk_n}' is not supported in the xdc constraint file. ["/home/centos/CWM-ECAD/Ex8/constraints.xdc":24]
+[Common 17-55] 'set_property' expects at least one object. ["/home/centos/CWM-ECAD/Ex8/constraints.xdc":47]
+[Designutils 20-1307] Command 'get_ports{clk_n}' is not supported in the xdc constraint file. ["/home/centos/CWM-ECAD/Ex8/constraints.xdc":24]
+[Common 17-55] 'set_property' expects at least one object. ["/home/centos/CWM-ECAD/Ex8/constraints.xdc":47]
+
+Question 2:
+worst case hold time:
+
+Question 3:
+worst case setup time: 
+
+Question 4:
+
+Question 5:
+
+Question 6:
+
+Question 7:
+
+Question 8:
+
